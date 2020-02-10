@@ -42,7 +42,7 @@ def main():
     slack = Slacker(slackbot_settings.API_TOKEN)
 
     #月曜であることの確認
-    if datetime.datetime.today().hour == 12:
+    if datetime.datetime.today().hour == 0:
         info(channel, slack)
 
     bot = Bot()
