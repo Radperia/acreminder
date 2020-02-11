@@ -41,7 +41,7 @@ def info(channel, slack):
 @respond_to('飯屋')
 def food(message):
     shop_list = ['我羅奢', '蔭山', '表裏', '中本', 'ピコピコポン', '波風', '破壊的', 'こころ']
-    message.reply(shop_list[random.randrange(shop_list.__sizeof__)])
+    message.reply(shop_list[random.randrange(len(shop_list))])
 
 def main():
     #Botを動かす前にチャンネルでのBotアプリケーションの追加を忘れずに
