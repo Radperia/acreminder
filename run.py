@@ -48,7 +48,8 @@ def main():
     slack = Slacker(slackbot_settings.API_TOKEN)
 
     #月曜であることの確認(廃止)
-    info(channel, slack)
+    if datetime.datetime.today().minute()==0:
+        info(channel, slack)
 
     bot = Bot()
     bot.run()
