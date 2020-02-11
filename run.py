@@ -55,7 +55,7 @@ def main():
     #API tokenはslackbot_settings.pyに保存
     slack = Slacker(slackbot_settings.API_TOKEN)
 
-    #月曜であることの確認
+    #月曜であることの確認(廃止)
     info(channel, slack)
 
     bot = Bot()
