@@ -54,7 +54,6 @@ def strtotime(date_sub):
     #datetimeオブジェクトにして返す
     return datetime.datetime.strptime(date_sub, '%Y-%m-%d %H:%M')
 
-
 def timetostr(date_sub):
     #datetimeオブジェクトをstrオブジェクトにして返す
 
