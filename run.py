@@ -1,9 +1,13 @@
 from slackbot.bot import Bot
+from slackbot.bot import respond_to
+from slackbot.bot import listen_to
 from slacker import Slacker
 import slackbot_settings
 import scrape
 import datetime
 import time
+import re
+import random
 
 def make_message(channel, slack, s, message):
     #slack.chat.post_messageを用いてメッセージを送る
@@ -32,7 +36,12 @@ def info(channel, slack):
         make_message(channel, slack, s2, "[今週のratedコンテスト一覧]")
 
     else:
-        slack.chat.post_message(channel, "[今週のratedコンテストはありません]", as_user = True)    
+        slack.chat.post_message(channel, "[今週のratedコンテストはありません]", as_user = True)
+
+@respond_to('飯屋')
+def food(message):
+    shop_list = ['我羅奢', '蔭山', '表裏', '中本', 'ピコピコポン', '波風', '破壊的', 'こころ']
+    message.reply(shop_list[random.randrange(shop_list.__sizeof__)])
 
 def main():
     #Botを動かす前にチャンネルでのBotアプリケーションの追加を忘れずに
