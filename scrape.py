@@ -67,7 +67,7 @@ def scrape_upcoming():
     contests3 = contests2.find_all("tr")
 
     #今日の日時を取得
-    #w = datetime.datetime.today()
+    w = datetime.datetime.today()
 
     #コンテストのurlと開始の日時をre_contestsに格納
     for c in contests3:
