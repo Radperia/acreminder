@@ -23,16 +23,16 @@ def info(channel, slack):
 
     #コンテスト乗法が無い場合はコンテストが存在しないメッセージを送る
     if len(s1) != 0:
-        make_message(channel, slack, s1, "[開催中のコンテスト一覧]")
+        make_message(channel, slack, s1, "[開催中のratedコンテスト一覧]")
 
     else:
-        slack.chat.post_message(channel, "[開催中のコンテストはありません]", as_user = True)
+        slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
 
     if len(s2) != 0:
-        make_message(channel, slack, s2, "[予定されているコンテスト一覧]")
+        make_message(channel, slack, s2, "[今週のratedコンテスト一覧]")
 
     else:
-        slack.chat.post_message(channel, "[予定されているコンテストはありません]", as_user = True)    
+        slack.chat.post_message(channel, "[今週のratedコンテストはありません]", as_user = True)    
 
 def main():
     #Botを動かす前にチャンネルでのBotアプリケーションの追加を忘れずに
