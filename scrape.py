@@ -79,8 +79,8 @@ def scrape_upcoming():
         t = strtotime(d1.text[:16])
 
         #その週の日曜までにないコンテストは格納しない
-        #if(t - w).days >= 7:
-        #    break
+        if(t - w).days >= 7:
+            break
 
         #formatを統一するためtimetostr関数を使う
         re_contests_sub.append(timetostr(t) + " 開始")
