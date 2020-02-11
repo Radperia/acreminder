@@ -1,6 +1,7 @@
 from slackbot.bot import Bot
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
+from slackbot.bot import default_reply
 from slacker import Slacker
 import slackbot_settings
 import scrape
@@ -42,6 +43,9 @@ def info(channel, slack):
 def seminar(message):
     message.reply('次回のゼミはありません')
 
+@default_reply()
+def default_func(message):
+    message.reply('ほげほげ')
 
 @respond_to('飯屋')
 def food(message):
