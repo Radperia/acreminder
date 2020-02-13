@@ -47,7 +47,7 @@ def main():
     #API tokenはslackbot_settings.pyに保存
     slack = Slacker(slackbot_settings.API_TOKEN)
 
-    #月曜であることの確認(廃止)
+    #毎時0分であることの確認
     if datetime.datetime.today().minute()==0:
         info(channel, slack)
 
