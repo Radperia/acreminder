@@ -18,4 +18,4 @@ def food(message):
 
 @default_reply()
 def default_func(message):
-    message.reply('いい加減バグ治って欲しい')
+    message.reply('……。')
