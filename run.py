@@ -5,6 +5,7 @@ from slackbot.bot import default_reply
 from slacker import Slacker
 import slackbot_settings
 import scrape
+import cf_scrape
 import datetime
 import time
 import re
@@ -22,7 +23,7 @@ def make_message(channel, slack, s, message):
     #as_userはTrueにすることで、urlが展開されて投稿される
     slack.chat.post_message(channel, message, as_user = True)
 
-def info(channel, slack):
+def AC_info(channel, slack):
     #先にスクレイピングしておいたコンテスト情報を格納
     s1 = scrape.scrape_active()
     s2 = scrape.scrape_upcoming()
@@ -35,10 +36,20 @@ def info(channel, slack):
         slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
 
     if len(s2) != 0:
-        make_message(channel, slack, s2, "[今週のratedコンテスト一覧]")
+        make_message(channel, slack, s2, "[今週のAtCoder ratedコンテスト一覧]")
 
     else:
-        slack.chat.post_message(channel, "[今週のratedコンテストはありません]", as_user = True)
+        slack.chat.post_message(channel, "[今週のAtCoder ratedコンテストはありません]", as_user = True)
+
+def CF_info(channel, slack):
+    #AC_info同様に先にスクレイピングしておいたコンテスト情報を格納
+    s1 = cf_scrape.scrape_upcoming()
+
+    if len(s1) != 0:
+        make_message(channel, slack, s1, "[今週のCodeforcesコンテスト一覧]")
+
+    else:
+        slack.chat.post_message(channel, "[今週のCodeforcesコンテストはありません]", as_user = True)
 
 def main():
     #Botを動かす前にチャンネルでのBotアプリケーションの追加を忘れずに
@@ -49,7 +60,8 @@ def main():
 
     #毎時0分であることの確認
     #if datetime.datetime.today().minute()==0:
-    info(channel, slack)
+    AC_info(channel, slack)
+    CF_info(channel, slack)
 
     bot = Bot()
     bot.run()
