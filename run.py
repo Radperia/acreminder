@@ -25,15 +25,15 @@ def make_message(channel, slack, s, message):
 
 def AC_info(channel, slack):
     #先にスクレイピングしておいたコンテスト情報を格納
-    s1 = scrape.scrape_active()
+    #s1 = scrape.scrape_active()
     s2 = scrape.scrape_upcoming()
 
     #コンテスト乗法が無い場合はコンテストが存在しないメッセージを送る
-    if len(s1) != 0:
-        make_message(channel, slack, s1, "[開催中のratedコンテスト一覧]")
+    #if len(s1) != 0:
+    #    make_message(channel, slack, s1, "[開催中のratedコンテスト一覧]")
 
-    else:
-        slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
+    #else:
+    #    slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
 
     if len(s2) != 0:
         make_message(channel, slack, s2, "[今週のAtCoder ratedコンテスト一覧]")
@@ -59,9 +59,9 @@ def main():
     slack = Slacker(slackbot_settings.API_TOKEN)
 
     #毎時0分であることの確認
-    #if datetime.datetime.today().minute()==0:
-    AC_info(channel, slack)
-    CF_info(channel, slack)
+    if datetime.datetime.today().minute()==0:
+        AC_info(channel, slack)
+        CF_info(channel, slack)
 
     bot = Bot()
     bot.run()
