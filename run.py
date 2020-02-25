@@ -67,10 +67,9 @@ def main():
     slack = Slacker(slackbot_settings.API_TOKEN)
 
     #毎時0分であることの確認
-    #if datetime.datetime.today().minute()==0:
-    
-    AC_info(channel, slack)
-    CF_info(channel, slack)
+    if datetime.datetime.today().minute()==0:
+        AC_info(channel, slack)
+        CF_info(channel, slack)
 
     bot = Bot()
     bot.run()
