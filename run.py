@@ -43,10 +43,17 @@ def AC_info(channel, slack):
 
 def CF_info(channel, slack):
     #AC_info同様に先にスクレイピングしておいたコンテスト情報を格納
-    s1 = cf_scrape.scrape_upcoming()
+    s1 = cf_scrape.scrape_active()
+    s2 = cf_scrape.scrape_upcoming()
 
     if len(s1) != 0:
-        make_message(channel, slack, s1, "[今週のCodeforcesコンテスト一覧]")
+        make_message(channel, slack, s1, "[現在開催中のCodeforcesコンテスト一覧]")
+
+    else:
+        slack.chat.post_message(channel, "[現在開催中のCodeforcesコンテストはありません]", as_user = True)
+
+    if len(s2) != 0:
+        make_message(channel, slack, s2, "[今週のCodeforcesコンテスト一覧]")
 
     else:
         slack.chat.post_message(channel, "[今週のCodeforcesコンテストはありません]", as_user = True)
