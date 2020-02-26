@@ -96,10 +96,6 @@ def scrape_upcoming():
         length = ""
         contest_url = ""
 
-        #print("______________________________")
-        #print("Here is " + str(i))
-        #print(contests2[i])
-
         if(i%6==0):
             if(before_flag is False):
                 contest_title = str(contests2[i].text)
