@@ -43,7 +43,6 @@ def AC_info(channel, slack):
 
 def CF_info(channel, slack):
     #AC_info同様に先にスクレイピングしておいたコンテスト情報を格納
-
     s1 = cf_scrape.scrape_active()
     s2 = cf_scrape.scrape_upcoming()
 
