@@ -27,8 +27,7 @@ def CF_make_message(channel, slack, s, message):
     #slack.chat.post_messageを用いてメッセージを送る
 
     for i in s:
-        for j in (len(v) for v in s):
-            message = message + "\n" + i[j]
+        message = message + "\n" + i[0] + "\n" + i[1] + " " + i[2] + "\n" + i[3] + "\n" + i[4] + "\n" + i[5] + " " + i[6] 
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
