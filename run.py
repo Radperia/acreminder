@@ -23,7 +23,7 @@ def AC_make_message(channel, slack, s, message):
 
 def CF_make_message(channel, slack, s, message):
     for i in s:
-        message = message + "\n" + i[0] + "\n" + i[1] + " " + i[2] + "\n" + i[3] + "\n" + i[4] + "\n" + i[5] + " " + i[6] 
+        message = message + "\n" + i[0] + "\n" + i[1] + " " + i[2] + "\n" + i[3]
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
