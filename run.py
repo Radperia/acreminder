@@ -13,8 +13,6 @@ import os
 import random
 
 def AC_make_message(channel, slack, s, message):
-    #slack.chat.post_messageを用いてメッセージを送る
-
     for i in s:
         message = message + "\n" + i[0] + "\n" + i[1] + "\n"
     #pos_messageでslack投稿
@@ -24,8 +22,6 @@ def AC_make_message(channel, slack, s, message):
     slack.chat.post_message(channel, message, as_user = True)
 
 def CF_make_message(channel, slack, s, message):
-    #slack.chat.post_messageを用いてメッセージを送る
-
     for i in s:
         message = message + "\n" + i[0] + "\n" + i[1] + " " + i[2] + "\n" + i[3] + "\n" + i[4] + "\n" + i[5] + " " + i[6] 
     #pos_messageでslack投稿
@@ -78,7 +74,7 @@ def main():
 
     #毎時0分であることの確認
     #if datetime.datetime.today().minute()<=5:
-    
+
     AC_info(channel, slack)
     CF_info(channel, slack)
 
