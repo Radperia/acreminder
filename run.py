@@ -12,7 +12,7 @@ import re
 import os
 import random
 
-def make_message(channel, slack, s, message):
+def AC_make_message(channel, slack, s, message):
     #slack.chat.post_messageを用いてメッセージを送る
 
     for i in s:
@@ -22,6 +22,18 @@ def make_message(channel, slack, s, message):
     #messageには投稿したいメッセージ
     #as_userはTrueにすることで、urlが展開されて投稿される
     slack.chat.post_message(channel, message, as_user = True)
+
+def CF_make_message(channel, slack, s, message):
+    #slack.chat.post_messageを用いてメッセージを送る
+
+    for i in s:
+        for j in (len(v) for v in s):
+            message = message + "\n" + i[j]
+    #pos_messageでslack投稿
+    #channelには投稿したいチャンネル
+    #messageには投稿したいメッセージ
+    #as_userはTrueにすることで、urlが展開されて投稿される
+    slack.chat.post_message(channel, message, as_user=True)
 
 def AC_info(channel, slack):
     #先にスクレイピングしておいたコンテスト情報を格納
@@ -36,7 +48,7 @@ def AC_info(channel, slack):
     #    slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
 
     if len(s2) != 0:
-        make_message(channel, slack, s2, "[今週のAtCoder ratedコンテスト一覧]")
+        AC_make_message(channel, slack, s2, "[今週のAtCoder ratedコンテスト一覧]")
 
     else:
         slack.chat.post_message(channel, "[今週のAtCoder ratedコンテストはありません]", as_user = True)
@@ -47,13 +59,13 @@ def CF_info(channel, slack):
     s2 = cf_scrape.scrape_upcoming()
 
     if len(s1) != 0:
-        make_message(channel, slack, s1, "[現在開催中のCodeforcesコンテスト一覧]")
+        CF_make_message(channel, slack, s1, "[現在開催中のCodeforcesコンテスト一覧]")
 
     else:
         slack.chat.post_message(channel, "[現在開催中のCodeforcesコンテストはありません]", as_user = True)
 
     if len(s2) != 0:
-        make_message(channel, slack, s2, "[今週のCodeforcesコンテスト一覧]")
+        CF_make_message(channel, slack, s2, "[今週のCodeforcesコンテスト一覧]")
 
     else:
         slack.chat.post_message(channel, "[今週のCodeforcesコンテストはありません]", as_user = True)

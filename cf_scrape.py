@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import datetime
 import sys
+import copy
 
 def scrape_active():
     #現在開催中のコンテスト情報を返す関数
@@ -25,10 +26,6 @@ def scrape_active():
         start_time = datetime.datetime.today()
         length = ""
         contest_url = ""
-
-        #print("--------------------------")
-        #print("Here is " + str(i))
-        #print(re_contests)
 
         if(i%6==0):
             contest_title = str(contests2[i].text)
@@ -76,7 +73,7 @@ def scrape_upcoming():
     #1週間以内に開催されるコンテスト情報を返す関数
 
     re_contests = []
-    active_contests_sub = []
+    upcoming_contests_sub = []
 
     url = "https://codeforces.com/contests/"
     access_url = "https://codeforces.com"
@@ -97,32 +94,36 @@ def scrape_upcoming():
         contest_url = ""
 
         if(i%6==0):
-            if(before_flag is False):
-                contest_title = str(contests2[i].text)
-                
-                contest_title = contest_title.replace('\r', '')
-                contest_title = contest_title.replace('\n', '')
-                if("Enter »" in contest_title):
-                    contest_title = contest_title.replace("Enter »", '')
-                contest_title = contest_title.rstrip()
+            contest_title = str(contests2[i].text)
+            
+            contest_title = contest_title.replace('\r', '')
+            contest_title = contest_title.replace('\n', '')
+            if("Enter »" in contest_title):
+                contest_title = contest_title.replace("Enter »", '')
+            contest_title = contest_title.rstrip()
 
-                active_contests_sub.append(contest_title)
+            upcoming_contests_sub.append(contest_title)
 
         if(i%6==2):
             start_time = strtotime(contests2[i].span.text)
             start_time += datetime.timedelta(hours=6)
+
             if(start_time - w).days < 0:
                 before_flag = True
-                active_contests_sub.clear()
+                upcoming_contests_sub.clear()
 
             elif(start_time - w).days >= 7:
+                print("**********************")
+                print(re_contests)
+                print("**********************")
                 # 苦し紛れ
-                del re_contests[-1]
+                #del re_contests[-1][-1]
+                #del re_contests[-1]
                 return re_contests
 
             else:
                 before_flag = False
-                active_contests_sub.append(timetostr(start_time) + " 開始")
+                upcoming_contests_sub.append(timetostr(start_time) + " 開始")
 
         if(i%6==3):
             if(before_flag is False):
@@ -132,19 +133,19 @@ def scrape_upcoming():
                 length = length.replace('\n', '')
                 length = length.strip()
 
-                active_contests_sub.append("コンテスト時間 " + length)
+                upcoming_contests_sub.append("コンテスト時間 " + length)
 
         if(i%6==5):
             if(before_flag is False):
                 try:
                     contest_url = contests2[i].a.get("href")
-                    active_contests_sub.append(access_url + contest_url)
-                except AttributeError:
-                    pass
+                    upcoming_contests_sub.append(access_url + contest_url)
 
-        if(i%6==5):
-            if(before_flag is False):
-                re_contests.append(active_contests_sub)
+                except AttributeError:
+                    return re_contests
+
+                else:
+                    re_contests.append(upcoming_contests_sub)
 
     return re_contests
 
