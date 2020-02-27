@@ -13,9 +13,8 @@ import os
 import random
 
 def AC_make_message(channel, slack, s, message):
-    for i in s:
-        for j in [len(v) for v in s]:
-            message = message + "\n" + i[j]
+    for j in range(sum(len(v) for v in s) - 1):
+        message = message + "\n" + s[0][j]
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
@@ -23,9 +22,8 @@ def AC_make_message(channel, slack, s, message):
     slack.chat.post_message(channel, message, as_user = True)
 
 def CF_make_message(channel, slack, s, message):
-    for i in s:
-        for j in [len(v) for v in s]:
-            message = message + "\n" + i[j]
+    for j in range(sum(len(v) for v in s) - 1):
+        message = message + "\n" + s[0][j]
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
