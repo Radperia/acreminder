@@ -113,12 +113,7 @@ def scrape_upcoming():
                 upcoming_contests_sub.clear()
 
             elif(start_time - w).days >= 7:
-                print("**********************")
-                print(re_contests)
-                print("**********************")
-                # 苦し紛れ
-                #del re_contests[-1][-1]
-                #del re_contests[-1]
+
                 return re_contests
 
             else:
