@@ -14,7 +14,8 @@ import random
 
 def AC_make_message(channel, slack, s, message):
     for i in s:
-        message = message + "\n" + i[0] + "\n" + i[1] + "\n"
+        for j in [len(v) for v in s]:
+            message = message + "\n" + i[j]
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
@@ -23,7 +24,8 @@ def AC_make_message(channel, slack, s, message):
 
 def CF_make_message(channel, slack, s, message):
     for i in s:
-        message = message + "\n" + i[0] + "\n" + i[1] + " " + i[2] + "\n" + i[3]
+        for j in [len(v) for v in s]:
+            message = message + "\n" + i[j]
     #pos_messageでslack投稿
     #channelには投稿したいチャンネル
     #messageには投稿したいメッセージ
@@ -73,9 +75,8 @@ def main():
     slack = Slacker(slackbot_settings.API_TOKEN)
 
     #毎時0分であることの確認
-    if(datetime.datetime.today().hour() is 0):
-        AC_info(channel, slack)
-        CF_info(channel, slack)
+    AC_info(channel, slack)
+    CF_info(channel, slack)
 
     bot = Bot()
     bot.run()
