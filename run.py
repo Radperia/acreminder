@@ -15,41 +15,27 @@ import random
 def AC_make_message(channel, slack, s, message):
     for j in range(sum(len(v) for v in s) - 1):
         message = message + "\n" + s[0][j]
-    #pos_messageでslack投稿
-    #channelには投稿したいチャンネル
-    #messageには投稿したいメッセージ
-    #as_userはTrueにすることで、urlが展開されて投稿される
+
     slack.chat.post_message(channel, message, as_user = True)
 
 def CF_make_message(channel, slack, s, message):
     for j in range(sum(len(v) for v in s) - 1):
         message = message + "\n" + s[0][j]
-    #pos_messageでslack投稿
-    #channelには投稿したいチャンネル
-    #messageには投稿したいメッセージ
-    #as_userはTrueにすることで、urlが展開されて投稿される
+
     slack.chat.post_message(channel, message, as_user=True)
 
 def AC_info(channel, slack):
-    #先にスクレイピングしておいたコンテスト情報を格納
-    #s1 = scrape.scrape_active()
-    s2 = scrape.scrape_upcoming()
 
-    #コンテスト乗法が無い場合はコンテストが存在しないメッセージを送る
-    #if len(s1) != 0:
-    #    make_message(channel, slack, s1, "[開催中のratedコンテスト一覧]")
+    s1 = scrape.scrape_upcoming()
 
-    #else:
-    #    slack.chat.post_message(channel, "[開催中のratedコンテストはありません]", as_user = True)
-
-    if len(s2) != 0:
-        AC_make_message(channel, slack, s2, "[今週のAtCoder ratedコンテスト一覧]")
+    if len(s1) != 0:
+        AC_make_message(channel, slack, s1, "[今週のAtCoder ratedコンテスト一覧]")
 
     else:
         slack.chat.post_message(channel, "[今週のAtCoder ratedコンテストはありません]", as_user = True)
 
 def CF_info(channel, slack):
-    #AC_info同様に先にスクレイピングしておいたコンテスト情報を格納
+
     s1 = cf_scrape.scrape_active()
     s2 = cf_scrape.scrape_upcoming()
 
@@ -66,13 +52,11 @@ def CF_info(channel, slack):
         slack.chat.post_message(channel, "[今週のCodeforcesコンテストはありません]", as_user = True)
 
 def main():
-    #Botを動かす前にチャンネルでのBotアプリケーションの追加を忘れずに
+
     channel = "競プロ"
 
-    #API tokenはslackbot_settings.pyに保存
     slack = Slacker(slackbot_settings.API_TOKEN)
 
-    #毎時0分であることの確認
     AC_info(channel, slack)
     CF_info(channel, slack)
 
