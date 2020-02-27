@@ -13,16 +13,16 @@ import os
 import random
 
 def AC_make_message(channel, slack, s, message):
-    for j in range(sum(len(v) for v in s) - 1):
+    for j in range(sum(len(v) for v in s)):
         message = message + "\n" + s[0][j]
 
     slack.chat.post_message(channel, message, as_user = True)
 
 def CF_make_message(channel, slack, s, message):
-    for j in range(sum(len(v) for v in s) - 1):
+    for j in range(sum(len(v) for v in s)):
         message = message + "\n" + s[0][j]
 
-    slack.chat.post_message(channel, message, as_user=True)
+    slack.chat.post_message(channel, message, as_user = True)
 
 def AC_info(channel, slack):
 
