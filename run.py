@@ -57,8 +57,9 @@ def main():
 
     slack = Slacker(slackbot_settings.API_TOKEN)
 
-    AC_info(channel, slack)
-    CF_info(channel, slack)
+    if datetime.datetime.today().hour() == 0:
+        AC_info(channel, slack)
+        CF_info(channel, slack)
 
     bot = Bot()
     bot.run()
