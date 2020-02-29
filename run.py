@@ -13,8 +13,8 @@ import os
 import random
 
 def AC_make_message(channel, slack, s, message):
-    for j in range(sum(len(v) for v in s)):
-        message = message + "\n" + s[0][j]
+    for i in s:
+        message = message + "\n" + i[0] + "\n" + i[1]
 
     slack.chat.post_message(channel, message, as_user = True)
 
